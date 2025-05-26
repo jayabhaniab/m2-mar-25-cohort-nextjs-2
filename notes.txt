@@ -1,0 +1,81 @@
+Introduction
+-----------------------------
+react vs nextjs
+react - a js library to create UIs
+nextjs - upgraded version of react, it has extra features
+
+
+
+SSR
+db --> get data --> HCJ        ------->     browser  -> paint
+                    (template)
+
+
+CSR
+db --> get data --> api      --------->     HCJ             -> browser -> paint
+                                            (template)
+
+
+
+cons of react:
+    1. no built-in router
+    2. seo problems
+
+
+pros of nextjs:
+    1. built-in router
+    2. efficient seo
+    3. built-in optimization
+    4. supports both SSR and CSR
+
+
+cons of csr:
+    1. slow api calls
+    2. seo issue
+    3. may slow in older device
+
+cons of ssr:
+    1. heavy server load
+    2. slow initial load
+
+
+when to go with CSR and SSR
+
+
+server comopnent vs client component
+
+
+
+
+data fetching
+-------------------------
+1. SSG - Static Site Generation
+fetches data once at build time
+Blogs, FAQs
+
+2. SSR - Server Side Rendering
+fetches fresh data on every request
+User dashboards, stock prices
+
+3. ISR - Incremental Site Regeneration
+fetches data at build time, updates after X seconds
+Products listing, news, merit list
+
+4. CSR - Client Side Rendering
+fetches data after page loads
+live chat, client-side filtering
+
+
+
+
+
+blog system
+----------------------------
+where user can view a list of blog posts and click on a post to see its full details.
+
+application should have:
+1. Homepae (/) - displays a list of blog posts with links
+2. Blog Detail Page (/blog/[id]) - loads content based on the post id
+3. Navigation using <Link />
+4. Programmatic Navigation (useRouter()) - Back to home button
+5. Global Layout (layout.js) - Common Navbar across all pages

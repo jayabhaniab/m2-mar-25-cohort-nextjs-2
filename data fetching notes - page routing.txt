@@ -1,0 +1,132 @@
+// SSR
+export async function getServerSideProps() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const users = await res.json();
+
+  return {
+    props: { users }, // Passing data to the page
+  };
+}
+
+export default function UsersPage({ users }) {
+  return (
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-4">User List</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id} className="mb-2">👤 {user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+
+
+
+
+//SSG
+export async function getStaticProps() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts = await res.json();
+
+  return {
+    props: { posts }, // Passing posts to the page
+  };
+}
+
+export default function PostsPage({ posts }) {
+  return (
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-4">Blog Posts</h1>
+      <ul>
+        {posts.slice(0, 10).map((post) => (
+          <li key={post.id} className="mb-2">📝 {post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+
+
+
+
+
+// SSG + Dynamic Routes
+export async function getStaticPaths() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts = await res.json();
+
+  const paths = posts.slice(0, 10).map((post) => ({
+    params: { id: post.id.toString() }, // Creating a page for each post
+  }));
+
+  return { paths, fallback: false }; // Pre-builds only these pages
+}
+
+export async function getStaticProps({ params }) {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
+  const post = await res.json();
+
+  return { props: { post } };
+}
+
+export default function PostDetail({ post }) {
+  return (
+    <div className="p-8">
+      <h1 className="text-3xl font-bold">{post.title}</h1>
+      <p className="mt-4">{post.body}</p>
+    </div>
+  );
+}
+
+
+
+
+
+
+//ISR
+export async function getStaticProps() {
+  console.log("Fetching data at build time (ISR)...");
+
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts = await res.json();
+
+  return {
+    props: { posts },
+    revalidate: 10, // Rebuilds page every 10 seconds
+  };
+}
+
+
+
+
+
+// With SWR
+"use client"; // Enables client-side behavior
+
+import useSWR from "swr";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+export default function UsersPage() {
+  const { data: users, error, isLoading } = useSWR(
+    "https://jsonplaceholder.typicode.com/users",
+    fetcher
+  );
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading users</p>;
+
+  return (
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-4">User List</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id} className="mb-2">👤 {user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
