@@ -79,3 +79,30 @@ application should have:
 3. Navigation using <Link />
 4. Programmatic Navigation (useRouter()) - Back to home button
 5. Global Layout (layout.js) - Common Navbar across all pages
+
+
+
+
+
+Layouts and Styling
+-------------------------------
+grid
+flex
+position - static, relative, absolute, fixed and sticky
+flow - display: inline, block and inline-block
+float
+
+
+ways
+----
+1. global css ✅
+2. inline css ✅
+<h1 style={{color: "blue", bg-color: "red"}}>...</h1>
+3. module css   ✅
+4. styled components (css-in-js)    ✅
+5. external libraries / frameworks
+bootstrap
+tailwind
+material UI
+shadcn
+chakra ui
