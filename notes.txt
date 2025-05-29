@@ -106,3 +106,14 @@ tailwind
 material UI
 shadcn
 chakra ui
+
+
+
+
+optimization
+-------------------
+1. image optimization
+2. font optimization
+
+
+
