@@ -3,9 +3,11 @@ import { Button, HStack } from "@chakra-ui/react";
 import { RiArrowRightLine, RiMailLine } from "react-icons/ri"
 import { MdMarkEmailUnread } from "react-icons/md";
 
+
 export default function Home() {
   return (
     <div>
+      
       {/* <h1>Welcome to Next.js</h1>
       <Button text="Click Me" />
       <Button text="Explore Courses" />
