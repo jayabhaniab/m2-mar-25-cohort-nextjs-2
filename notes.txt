@@ -122,3 +122,14 @@ database
         document2
     collection2
         document1
+
+
+
+authentication
+cookies
+session
+iron-session
+
+login click -> server creates session -> save encrypted cookie to browser
+refresh -> browser send cookie -> server identifies -> you stay logged-in
+logout click -> cookie delete -> session end
